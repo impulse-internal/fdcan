@@ -137,6 +137,16 @@ impl From<Id> for IdType {
     }
 }
 
+impl From<Id> for u32 {
+    #[inline]
+    fn from(id: Id) -> Self {
+        match id {
+            Id::Standard(id) => id.as_raw() as u32,
+            Id::Extended(id) => id.as_raw(),
+        }
+    }
+}
+
 /// Identifier of a CAN message.
 ///
 /// FdCan be either a standard identifier (11bit, Range: 0..0x7FF) or a
